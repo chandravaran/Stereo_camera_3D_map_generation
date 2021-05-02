@@ -1,0 +1,35 @@
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="model" default="$(find mapping_robot_1)/urdf/mapping_robot_1.urdf"/>
+  <arg name="extra_gazebo_args" default="--verbose"/>
+ <!-- <include
+    file="$(find gazebo_ros)/launch/empty_world.launch" /> -->
+  <include
+    file="$(find ebot_gazebo)/launch/original.launch" /> 
+  <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 40" />
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find mapping_robot_1)/urdf/mapping_robot_1.urdf -urdf -model mapping_robot_1"
+    output="screen" />
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+  <!-- <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+  <rosparam file="$(find mapping_robot_1)/config/joint_names_mapping_robot_1.yaml" command="load"/>
+  <node name="controller_spawner" pkg ="controller_manager" type="spawner" ns="/simple_model" args="left_wheel_trans right_wheel_trans 
+	joint_state_controller -shutdown-timeout 3"/>     -->
+
+  <!-- <node name="stereo" pkg="mapping_robot_1" type="stereo.py" output="screen" launch-prefix="gnome-terminal -command"/> -->
+</launch>

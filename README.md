@@ -6,3 +6,6 @@ The ipynb files contains cencus transform, Sum of absolute difference and the No
 This repo has 2 main folders, there is the python implementation of the new model we propose for and methods like census transform and Sum of absolute difference have been analysed.
 
 There is a also a ros package that has the implementation of the method on a custom robot desinged, the methods have also been written in cpp and kept within header files so they can be easily reused.
+
+Youtube link:
+https://youtu.be/lxiuDoQuzrA
